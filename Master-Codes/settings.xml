@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite id="511973bc-7410-469e-9f55-894d2f230368" name="Master Codes" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="511973bc-7410-469e-9f55-894d2f230368fileName">Master-Codes</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:runType>SEQUENTIAL</con:runType><con:properties><con:property><con:name>toooken</con:name><con:value>65816bd4-9223-49b8-8f37-0087f82a747c</con:value></con:property></con:properties><con:reportParameters/></con:testSuite>

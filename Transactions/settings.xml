@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite id="b4ae1471-bcfa-45b9-bd35-f1629e1d0c66" name="Transactions" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="b4ae1471-bcfa-45b9-bd35-f1629e1d0c66fileName">Transactions</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:runType>SEQUENTIAL</con:runType><con:properties><con:property><con:name>TestCaseProp</con:name><con:value>asdf</con:value></con:property></con:properties><con:reportParameters/></con:testSuite>

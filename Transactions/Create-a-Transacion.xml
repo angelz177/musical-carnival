@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="20849a35-2067-45e6-9db6-988d9696dbb7" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="Create a Transacion" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="20849a35-2067-45e6-9db6-988d9696dbb7fileName">Create-a-Transacion</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="restrequest" name="Create a Transaction" id="92dcb1f6-9bf6-4ec2-bd58-3d842bd5cec2"><con:settings/><con:config service="Transactions API" resourcePath="/transactions" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Create a Transaction" id="8ae480a3-94e7-4f24-8bfd-9cad989c5aa4" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8061/api/v1</con:endpoint><con:request>{
+	"trackingId": ${Get Created Transaction By Id},
+	"productId": "1234",
+	"productName": "Discover It",
+	"websiteId": "4321",
+	"websiteName": "Creditcards.com",
+	"issuerId": "1234",
+	"issuerName": "Discover",
+	"referralDt": "2017-05-11 09:00:00",
+	"providerProcessDt": "2017-05-12 17:34:15",
+	"applicationDt": "2017-05-12 17:35:00",
+	"warnings": null,
+	"errors": null,
+	"stage": {
+		"codeValueId": 8,
+		"codeId": 101,
+		"value": "DEC",
+		"displayDescription": "Decline"
+	}
+}</con:request><con:originalUri>http://localhost/api/v1/transactions</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="e0bca34c-7aba-4aa7-a23d-e9313bcd6870" name="201 Created Check"><con:settings/><con:configuration><codes>201</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters><entry key="token" value="65816bd4-9223-49b8-8f37-0087f82a747c" xmlns="http://eviware.com/soapui/config"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="PropertyTransfer 1" id="ab661994-272b-4ceb-9fed-7034ab4162a3"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Create a Transaction</con:sourceStep><con:sourcePath>$['data']['id']</con:sourcePath><con:targetType xsi:nil="true"/><con:targetStep>Create a Transaction</con:targetStep><con:targetPath/><con:type>JSONPATH</con:type><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Create a Transaction</con:sourceStep><con:sourcePath>$['data']['id']</con:sourcePath><con:targetType>id</con:targetType><con:targetStep>Get Created Transaction By Id</con:targetStep><con:type>JSONPATH</con:type><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="restrequest" name="Get All Transactions" id="4375c567-777b-4ec1-8698-89214b42562d"><con:settings/><con:config service="Transactions API" resourcePath="/transactions" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get All Transactions" id="5fc4b9b9-b7a1-4892-8ee0-0804f8ca7265" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8061/api/v1</con:endpoint><con:request/><con:originalUri>http://localhost/api/v1/transactions</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="f453e07b-b349-47b5-840b-084e10e91883" name="200 OK Check"><con:settings/><con:configuration><codes>200
+</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters>
+  <con:entry key="sort" value=""/>
+  <con:entry key="page[size]" value="10000"/>
+  <con:entry key="token" value="65816bd4-9223-49b8-8f37-0087f82a747c"/>
+</con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="datasource" name="DataSource" id="0eea3000-6ac8-463b-aa27-b7f67f174c27"><con:settings/><con:config xsi:type="con:DataSourceStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dataSource type="JSON"><con:configuration><sourceStep/><sourceProperty/><rowPath/><columnPath>{--Specify the values that will be used to assign data to properties. Use the Get Data button on the right or enter a JSONPath expression manually.--}</columnPath></con:configuration></con:dataSource><con:completeLastOperation>true</con:completeLastOperation><con:restartOnRun>true</con:restartOnRun></con:config></con:testStep><con:testStep type="groovy" name="Check for Transaction Id in Get All" id="136b8324-2fab-4448-bf5d-ae4629b7d337"><con:settings/><con:config><script>import groovy.json.JsonSlurper
+
+createdId = testRunner.testCase.getTestStepAt(context.currentStepIndex -2 ).getPropertyValue("TransactionId")
+getAllResp = testRunner.testCase.getTestStepAt(context.currentStepIndex -1 ).getPropertyValue("response")
+
+resp = new JsonSlurper().parseText(getAllResp)
+log.info(resp)
+log.info(createdId)
+
+transactionIds = [resp.data.transactionId]
+log.info(transactionIds[0])
+
+
+log.info(transactionIds[0].contains(8))
+def transactionId = context.expand( '${Create a Transaction#Response#$[\'data\'][\'id\']}' ).toString()
+log.info(transactionId)
+
+assert(transactionIds[0].contains(transactionId))
+</script></con:config></con:testStep><con:testStep type="restrequest" name="Get Created Transaction By Id" id="aa54ec44-6458-47c9-a90d-6ef637793ff5"><con:settings/><con:config service="Transactions API" resourcePath="/transactions/{id}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get Created Transaction By Id" id="13315b4c-91d2-4a2d-b12e-2a1ba1bb6b50" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8061/api/v1</con:endpoint><con:request/><con:originalUri>http://localhost/api/v1/transactions/15</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="c631f466-5160-4a43-8448-a5a0b6af7a58" name="200 OK Check"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters>
+  <con:entry key="id" value="1445"/>
+  <con:entry key="token" value="65816bd4-9223-49b8-8f37-0087f82a747c"/>
+</con:parameters><con:parameterOrder><con:entry>id</con:entry><con:entry>token</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>ThisCaseProp</con:name><con:value/></con:property></con:properties><con:reportParameters/><con:breakPoints><con:testStepId>4375c567-777b-4ec1-8698-89214b42562d</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>136b8324-2fab-4448-bf5d-ae4629b7d337</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase>
